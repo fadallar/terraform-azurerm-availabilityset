@@ -63,7 +63,7 @@ resource "random_password" "vmpass" {
   special = true
 }
 
-module "session_host" {
+module "vm" {
   source                          = "git::https://ECTL-AZURE@dev.azure.com/ECTL-AZURE/ECTL-Terraform-Modules/_git/terraform-azurerm-vmwindows//module?ref=release/1.1.0"
   landing_zone_slug               = local.landing_zone_slug
   stack                           = local.stack

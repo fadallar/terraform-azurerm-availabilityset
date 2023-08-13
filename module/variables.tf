@@ -23,15 +23,23 @@ variable "stack" {
 }
 
 variable "platform_update_domain_count" {
-    description = " Specifies the number of update domains that are used.Changing this forces a new resource to be created."
+    description = " Specifies the number of update domains that are used.Changing this forces a new resource to be created. If the fault domain is set to 1 the update domain must be set 1"
     type = number
     default = 5
+    validation {
+      condition = var.platform_update_domain_count >= 1 and var.platform_update_domain_count <= 20
+      error_message= "Invalid value update domain count, the correct value should be between 1 and 20"
+    }
 } 
 
 variable "platform_fault_domain_count" {
-    description = " Specifies the number of fault domains that are used.Changing this forces a new resource to be created"
+    description = " Specifies the number of fault domains  that are used.Changing this forces a new resource to be created"
     type = number
     default = 3
+    validation {
+      condition = var.platform_fault_domain_count >= 1 && var.platform_fault_domain_count <= 3
+      error_message = "Invalid platform fault domain count, the correct valude should be between 1 and 3"
+    }
 }
 
 variable "proximity_placement_group_id" {
@@ -41,7 +49,7 @@ variable "proximity_placement_group_id" {
 }
 #
 variable "managed"  {
-    description = " Specifies whether the availability set is managed or not. Possible values are true (to specify aligned) or false (to specify classic).Changing this forces a new resource to be created."
+    description = "Specifies whether the availability set is managed or not. Possible values are true (to specify aligned) or false (to specify classic).Changing this forces a new resource to be created."
     type = bool
     default = true
 }
