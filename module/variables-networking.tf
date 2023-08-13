@@ -1,0 +1,1 @@
+# No networking for this resource
